@@ -1,0 +1,68 @@
+$date
+	Tue Jan  9 09:47:53 2024
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1s
+$end
+$scope module testbench $end
+$var wire 1 ! Sum $end
+$var wire 1 " C_out $end
+$var reg 1 # A $end
+$var reg 1 $ B $end
+$var reg 1 % C_in $end
+$scope module FAdd $end
+$var wire 1 # A $end
+$var wire 1 $ B $end
+$var wire 1 % C_in $end
+$var wire 1 ! Sum $end
+$var wire 1 " C_out $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+x%
+x$
+x#
+x"
+x!
+$end
+#5
+0!
+0"
+0%
+0$
+0#
+#10
+1!
+1%
+#15
+0%
+1$
+#20
+0!
+1"
+1%
+#25
+0"
+1!
+0%
+0$
+1#
+#30
+0!
+1"
+1%
+#35
+0%
+1$
+#40
+1!
+1%
+#45

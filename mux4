@@ -1,0 +1,43 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x158707c70 .scope module, "mux4" "mux4" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "unnamed";
+    .port_info 1 /INPUT 2 "unnamed";
+    .port_info 2 /OUTPUT 1 "OUT";
+o0x160018010 .functor BUFZ 4, C4<zzzz>; HiZ drive
+v0x158707e30_0 .net "A", 0 3, o0x160018010;  0 drivers
+v0x158717eb0_0 .net "OUT", 0 0, L_0x158718fd0;  1 drivers
+o0x160018070 .functor BUFZ 2, C4<zz>; HiZ drive
+v0x158717f50_0 .net "SEL", 0 1, o0x160018070;  0 drivers
+v0x158717ff0_0 .net *"_ivl_1", 0 0, L_0x158718710;  1 drivers
+v0x1587180a0_0 .net *"_ivl_11", 0 0, L_0x158718c00;  1 drivers
+v0x158718190_0 .net *"_ivl_13", 0 0, L_0x158718ca0;  1 drivers
+v0x158718240_0 .net *"_ivl_15", 0 0, L_0x158718d80;  1 drivers
+v0x1587182f0_0 .net *"_ivl_16", 0 0, L_0x158718ea0;  1 drivers
+v0x1587183a0_0 .net *"_ivl_3", 0 0, L_0x1587187b0;  1 drivers
+v0x1587184b0_0 .net *"_ivl_5", 0 0, L_0x158718890;  1 drivers
+v0x158718560_0 .net *"_ivl_7", 0 0, L_0x158718970;  1 drivers
+v0x158718610_0 .net *"_ivl_8", 0 0, L_0x158718a70;  1 drivers
+L_0x158718710 .part o0x160018070, 0, 1;
+L_0x1587187b0 .part o0x160018070, 1, 1;
+L_0x158718890 .part o0x160018010, 0, 1;
+L_0x158718970 .part o0x160018010, 1, 1;
+L_0x158718a70 .functor MUXZ 1, L_0x158718970, L_0x158718890, L_0x1587187b0, C4<>;
+L_0x158718c00 .part o0x160018070, 1, 1;
+L_0x158718ca0 .part o0x160018010, 2, 1;
+L_0x158718d80 .part o0x160018010, 3, 1;
+L_0x158718ea0 .functor MUXZ 1, L_0x158718d80, L_0x158718ca0, L_0x158718c00, C4<>;
+L_0x158718fd0 .functor MUXZ 1, L_0x158718ea0, L_0x158718a70, L_0x158718710, C4<>;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "mux4.v";

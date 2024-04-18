@@ -1,0 +1,62 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x139608710 .scope module, "testbench" "testbench" 2 1;
+ .timescale 0 0;
+v0x13961e600_0 .var "I", 1 0;
+v0x13961e690_0 .net "O", 3 0, L_0x13961ed50;  1 drivers
+S_0x139608880 .scope module, "e" "deco" 2 5, 3 1 0, S_0x139608710;
+ .timescale 0 0;
+    .port_info 0 /INPUT 2 "I";
+    .port_info 1 /OUTPUT 4 "O";
+v0x13960cdf0_0 .net "I", 1 0, v0x13961e600_0;  1 drivers
+v0x13961de60_0 .net "O", 3 0, L_0x13961ed50;  alias, 1 drivers
+v0x13961df00_0 .net *"_ivl_1", 0 0, L_0x13961e740;  1 drivers
+v0x13961dfb0_0 .net *"_ivl_11", 0 0, L_0x13961eaa0;  1 drivers
+L_0x1400780a0 .functor BUFT 1, C4<0100>, C4<0>, C4<0>, C4<0>;
+v0x13961e060_0 .net/2u *"_ivl_12", 3 0, L_0x1400780a0;  1 drivers
+L_0x1400780e8 .functor BUFT 1, C4<0001>, C4<0>, C4<0>, C4<0>;
+v0x13961e150_0 .net/2u *"_ivl_14", 3 0, L_0x1400780e8;  1 drivers
+v0x13961e200_0 .net *"_ivl_16", 3 0, L_0x13961ebc0;  1 drivers
+v0x13961e2b0_0 .net *"_ivl_3", 0 0, L_0x13961e840;  1 drivers
+L_0x140078010 .functor BUFT 1, C4<1000>, C4<0>, C4<0>, C4<0>;
+v0x13961e360_0 .net/2u *"_ivl_4", 3 0, L_0x140078010;  1 drivers
+L_0x140078058 .functor BUFT 1, C4<0010>, C4<0>, C4<0>, C4<0>;
+v0x13961e470_0 .net/2u *"_ivl_6", 3 0, L_0x140078058;  1 drivers
+v0x13961e520_0 .net *"_ivl_8", 3 0, L_0x13961e900;  1 drivers
+L_0x13961e740 .part v0x13961e600_0, 0, 1;
+L_0x13961e840 .part v0x13961e600_0, 1, 1;
+L_0x13961e900 .functor MUXZ 4, L_0x140078058, L_0x140078010, L_0x13961e840, C4<>;
+L_0x13961eaa0 .part v0x13961e600_0, 1, 1;
+L_0x13961ebc0 .functor MUXZ 4, L_0x1400780e8, L_0x1400780a0, L_0x13961eaa0, C4<>;
+L_0x13961ed50 .functor MUXZ 4, L_0x13961ebc0, L_0x13961e900, L_0x13961e740, C4<>;
+    .scope S_0x139608710;
+T_0 ;
+    %vpi_call 2 8 "$monitor", $time, " I = %b, O = %b", v0x13961e600_0, v0x13961e690_0 {0 0 0};
+    %pushi/vec4 0, 0, 2;
+    %store/vec4 v0x13961e600_0, 0, 2;
+    %delay 5, 0;
+    %pushi/vec4 1, 0, 2;
+    %store/vec4 v0x13961e600_0, 0, 2;
+    %delay 5, 0;
+    %pushi/vec4 2, 0, 2;
+    %store/vec4 v0x13961e600_0, 0, 2;
+    %delay 5, 0;
+    %pushi/vec4 3, 0, 2;
+    %store/vec4 v0x13961e600_0, 0, 2;
+    %delay 5, 0;
+    %vpi_call 2 13 "$finish" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "ex-test.v";
+    "ex.v";
