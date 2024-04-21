@@ -28,8 +28,8 @@ initial begin
     rstn = 0;
     pause = 0;
     #50 rstn = 1;
-    #100 pause = 1;
-    #50 pause = 0;
+    // #100 pause = 1;
+    // #50 pause = 0;
     #200 $finish;
 end
 

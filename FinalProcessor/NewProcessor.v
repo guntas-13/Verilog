@@ -1,7 +1,7 @@
 `timescale 1ns / 1ps
 
 module Processor(
-    clk, rstn, pause
+    clk, rstn, pause,
     ACC,
     EXT,
     CB
@@ -76,22 +76,22 @@ the PC is incremented by 1
 always @(posedge clk or negedge rstn) begin
     if(!rstn)begin
 
-        RegFile[0] <= 8'd1;
-        RegFile[1] <= 8'd2;
-        RegFile[2] <= 8'd3;
-        RegFile[3] <= 8'd4;
-        RegFile[4] <= 8'd5;
-        RegFile[5] <= 8'd6;
-        RegFile[6] <= 8'd7;
-        RegFile[7] <= 8'd8;
-        RegFile[8] <= 8'd9;
-        RegFile[9] <= 8'd10;
-        RegFile[10] <= 8'd11;
-        RegFile[11] <= 8'd12;
-        RegFile[12] <= 8'd13;
-        RegFile[13] <= 8'd14;
-        RegFile[14] <= 8'd15;
-        RegFile[15] <= 8'd16;
+        RegFile[0] <= 8'd0;
+        RegFile[1] <= 8'd1;
+        RegFile[2] <= 8'd2;
+        RegFile[3] <= 8'd3;
+        RegFile[4] <= 8'd4;
+        RegFile[5] <= 8'd5;
+        RegFile[6] <= 8'd6;
+        RegFile[7] <= 8'd7;
+        RegFile[8] <= 8'd8;
+        RegFile[9] <= 8'd9;
+        RegFile[10] <= 8'd10;
+        RegFile[11] <= 8'd11;
+        RegFile[12] <= 8'd12;
+        RegFile[13] <= 8'd13;
+        RegFile[14] <= 8'd14;
+        RegFile[15] <= 8'd15;
 
         /*
 
@@ -107,7 +107,7 @@ always @(posedge clk or negedge rstn) begin
 
         /*
             SIMULATION OF THE PROGRAM
-            1. MOV ACC R1   ACC <- 2
+            1. MOV ACC R1   ACC <- 1
             2. XOR R1       ACC <- 0
             3. ADD R5       ACC <- 5
             4. ADD R6       ACC <- 11
