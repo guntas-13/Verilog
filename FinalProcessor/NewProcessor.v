@@ -105,6 +105,16 @@ always @(posedge clk or negedge rstn) begin
 
         */
 
+        /*
+            SIMULATION OF THE PROGRAM
+            1. MOV ACC R1   ACC <- 2
+            2. XOR R1       ACC <- 0
+            3. ADD R5       ACC <- 5
+            4. ADD R6       ACC <- 11
+            5. MOV R7 ACC   R7 <- 11
+            6. HLT
+        */
+
         PROGRAM[0] <= 8'b10010001;
         PROGRAM[1] <= 8'b01100001;
         PROGRAM[2] <= 8'b00010101;

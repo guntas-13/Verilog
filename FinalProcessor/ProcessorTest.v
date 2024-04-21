@@ -23,6 +23,7 @@ Processor dut (
 always #((CLK_PERIOD/2)) clk = ~clk;
 
 initial begin
+    $monitor($time, " ACC = %b, EXT = %b, CB = %b", ACC, EXT, CB);
     clk = 0;
     rstn = 0;
     pause = 0;
