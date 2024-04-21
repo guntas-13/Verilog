@@ -173,35 +173,35 @@ always @(IR) begin
             end
             else if (IR[3:0] == 4'b0110) begin
                 // INC ACC
-                SUMDIFF <= ACC + 1;
-                CB <= SUMDIFF[8];
-                ACC <= SUMDIFF[7:0];
+                SUMDIFF = ACC + 1;
+                CB = SUMDIFF[8];
+                ACC = SUMDIFF[7:0];
             end
             else if (IR[3:0] == 4'b0111) begin
                 // DEC ACC
-                SUMDIFF <= ACC - 1;
-                CB <= SUMDIFF[8];
-                ACC <= SUMDIFF[7:0];
+                SUMDIFF = ACC - 1;
+                CB = SUMDIFF[8];
+                ACC = SUMDIFF[7:0];
             end
         end
 
         4'b0001:begin
             //ADD Ri
-            SUMDIFF <= ACC + RegFile[IR[3:0]];
-            CB <= SUMDIFF[8];
-            ACC <= SUMDIFF[7:0];
+            SUMDIFF = ACC + RegFile[IR[3:0]];
+            CB = SUMDIFF[8];
+            ACC = SUMDIFF[7:0];
         end
         4'b0010:begin
             //SUB Ri
-            SUMDIFF <= ACC - RegFile[IR[3:0]];
-            CB <= SUMDIFF[8];
-            ACC <= SUMDIFF[7:0];
+            SUMDIFF = ACC - RegFile[IR[3:0]];
+            CB = SUMDIFF[8];
+            ACC = SUMDIFF[7:0];
         end
         4'b0011:begin
             //MUL Ri
-            MULTDIV <= ACC * RegFile[IR[3:0]];
-            ACC <= MULTDIV[7:0];
-            EXT <= MULTDIV[15:8];
+            MULTDIV = ACC * RegFile[IR[3:0]];
+            ACC = MULTDIV[7:0];
+            EXT = MULTDIV[15:8];
         end
         4'b0100:begin
             //DIV Ri
@@ -217,8 +217,8 @@ always @(IR) begin
         end
         4'b0111:begin
             //CMP Ri
-            SUMDIFF <= ACC - RegFile[IR[3:0]];
-            CB <= SUMDIFF[8];
+            SUMDIFF = ACC - RegFile[IR[3:0]];
+            CB = SUMDIFF[8];
         end
         4'b1000:begin
             //BR <4-bit address>

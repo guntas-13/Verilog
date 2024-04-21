@@ -2,4 +2,4 @@
 
 ![](https://github.com/guntas-13/Verilog/blob/main/Demo.png)
 
-![](https://github.com/guntas-13/Verilog/blob/main/FinalProcessor/SimulationResult.png)
+![](https://github.com/guntas-13/Verilog/blob/main/FinalProcessor/Result.png)
