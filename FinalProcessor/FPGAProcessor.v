@@ -1,12 +1,23 @@
 `timescale 1ns / 1ps
 
+module ClockDivide(input main_clk,
+output slow_clk);
+reg [31:0] counter;
+always@(posedge main_clk)
+begin
+counter = counter + 1;
+end
+assign slow_clk = counter[27];
+endmodule
+
+
 module Processor(
     clk, rstn, pause,mode,
     CB,
     Output
-    ,PC
+    ,slow_clk,PC
 );
-
+output wire slow_clk;
 input [4:0] mode;
 input clk, rstn, pause;
 reg [7:0] PROGRAM [15:0];
@@ -14,7 +25,6 @@ reg [7:0] RegFile [15:0];
 reg [7:0] ACC;
 reg [7:0] EXT;
 output reg [7:0] Output;
-//reg [7:0] Register;
 output reg CB;
 reg [8:0] SUMDIFF;
 reg [15:0] MULTDIV;
@@ -23,6 +33,7 @@ reg [7:0] IR;
 output reg [3:0] PC;
 wire [7:0] Rem;
 integer i;
+ClockDivide obj(.main_clk(clk), .slow_clk(slow_clk));
 division obj1(.A(ACC), .B(RegFile[IR[3:0]]), .Res(Div), .Rem(Rem));
 
 /*
@@ -78,7 +89,7 @@ the PC is incremented by 1
     20. 1111 1111 : HLT (Halt the program)
 */
 
-always @(posedge clk or negedge rstn) begin
+always @(posedge slow_clk or negedge rstn) begin
     if(!rstn)begin
 
         RegFile[0] <= 8'd0;
@@ -98,34 +109,21 @@ always @(posedge clk or negedge rstn) begin
         RegFile[14] <= 8'd14;
         RegFile[15] <= 8'd15;
 
-        /*
-
-            THE PROGRAM
-            1. MOV ACC R1   IR <- 1001 0001  (Load R1 in ACC)             
-            2. XOR R1       IR <- 0110 0001  (Clear ACC)                  
-            3. ADD R5       IR <- 0001 0101  (ACC + R5)                   
-            4. ADD R6       IR <- 0001 0110  (ACC + R6 (which is R5 + R6))
-            5. MOV R7 ACC   IR <- 1010 0111  (Store ACC in R7)            
-            6. HLT          IR <- 1111 1111                               
-
-        */
-
-        /*
-            SIMULATION OF THE PROGRAM
-            1. MOV ACC R1   ACC <- 1
-            2. XOR R1       ACC <- 0
-            3. ADD R5       ACC <- 5
-            4. ADD R6       ACC <- 11
-            5. MOV R7 ACC   R7 <- 11
-            6. HLT
-        */
-
-        PROGRAM[0] <= 8'b10010001;    // 1. MOV ACC R1   ACC <- 1
-        PROGRAM[1] <= 8'b01100001;    // 2. XOR R1       ACC <- 0   
-        PROGRAM[2] <= 8'b00010101;    // 3. ADD R5       ACC <- 5
-        PROGRAM[3] <= 8'b00010110;    // 4. ADD R6       ACC <- 11
-        PROGRAM[4] <= 8'b10100111;    // 5. MOV R7 ACC   R7 <- 11
-        PROGRAM[5] <= 8'b11111111;    // 6. HLT
+        PROGRAM[0] <= 8'b10010011;    // 1.  MOV ACC R3   ACC <- 3
+        PROGRAM[1] <= 8'b01100011;    // 2.  XOR R3       ACC <- 0   
+        PROGRAM[2] <= 8'b00010101;    // 3.  ADD R5       ACC <- 5
+        PROGRAM[3] <= 8'b00010110;    // 4.  ADD R6       ACC <- 11
+        PROGRAM[4] <= 8'b10100111;    // 5.  MOV R7 ACC   R7 <- 11
+        PROGRAM[5] <= 8'b00000110;    // 6.  INC ACC ACC = 00001100
+        PROGRAM[6] <= 8'b00000111;    // 7.  DEC ACC ACC = 00001011
+        PROGRAM[7] <= 8'b00101010;    // 8.  SUB R10 ACC = 00000001
+        PROGRAM[8] <= 8'b00110100;    // 9.  MUL R4 ACC = 00000100
+        PROGRAM[9] <= 8'b01100101;    // 10. XOR R5 ACC = 00000001
+        PROGRAM[10] <= 8'b00110100;   // 11. MUL R4 ACC = 00000100
+        PROGRAM[11] <= 8'b01000100;   // 12. DIV R4 ACC = 00000001
+        PROGRAM[12] <= 8'b01110101;   // 13. CMP R5 CB = 1
+        PROGRAM[13] <= 8'b10000101;   // 14. CB =1 branch to PC = 5
+        PROGRAM[14] <= 8'b11111111;   // 15. HLT
 
         PC <= 4'b0;
         IR <= 8'b0;
@@ -261,7 +259,6 @@ always @(posedge clk or negedge rstn) begin
                 end
                 4'b0100:begin
                     //DIV Ri
-                    // Need a synthesizable way to implement division
                     ACC = Div;
                     EXT = Rem;
                 end
@@ -298,15 +295,15 @@ always @(posedge clk or negedge rstn) begin
                 end
                 4'b1111:begin
                     //HLT
-                     $finish;
+                    $finish;
                 end
     endcase
         PC = PC + 1;
         end
 
         else begin
-            IR = IR;
-            PC = PC;
+            IR <= IR;
+            PC <= PC;
         end
     end
 
