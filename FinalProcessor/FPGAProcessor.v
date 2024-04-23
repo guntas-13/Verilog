@@ -234,7 +234,13 @@ always @(posedge slow_clk or negedge rstn) begin
                         // DEC ACC
                         SUMDIFF = ACC - 1;
                         CB = SUMDIFF[8];
+                        if(CB ==0)begin
                         ACC = SUMDIFF[7:0];
+                        end
+                        else begin
+                            SUMDIFF = 8'b1 - ACC;
+                            ACC = SUMDIFF[7:0];
+                        end
                     end
                   end
 
@@ -249,7 +255,13 @@ always @(posedge slow_clk or negedge rstn) begin
                     //SUB Ri
                     SUMDIFF = ACC - RegFile[IR[3:0]];
                     CB = SUMDIFF[8];
+                  if(CB ==0)begin
                     ACC = SUMDIFF[7:0];
+                   end
+                    else begin
+                        SUMDIFF = RegFile[IR[3:0]] - ACC;
+                        ACC = SUMDIFF[7:0];
+                    end
                 end
                 4'b0011:begin
                     //MUL Ri
